@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Inject } from '@midwayjs/core';
+import { Controller, Get, Inject } from '@midwayjs/core';
 import { UserService } from '../service/user.service';
 
 @Controller('/')
@@ -15,9 +15,4 @@ export class HomeController {
   @Inject()
   userService: UserService;
 
-  @Get('/get_user')
-  async getUser(@Query('uid') uid) {
-    const user = await this.userService.getUser({ uid });
-    return { success: true, message: 'OK', data: user };
-  }
 }
