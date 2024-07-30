@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css'
 import * as axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 
 
@@ -33,6 +34,7 @@ function LoginPage() {
                 const { success, message } = response.data;
                 if (success === true) {
                     alert(message)
+                    Cookies.set('username', username, { expires: 7 });
                     handleLoginSuccess();
                 } else {
                     handleLoginFailure(message);

@@ -1,6 +1,5 @@
 import { Body, Controller, Inject, Post } from '@midwayjs/core';
 import { UserService } from '../service/user.service';
-import { Context } from '@midwayjs/koa';
 
 
 export class UserDto {
@@ -8,29 +7,26 @@ export class UserDto {
     password: string;
 }
 
-@Controller('/login')
+@Controller('/register')
 export class LoginController {
     @Inject()
     userService: UserService;
-    // ctx:Context;
 
     @Post('/')
-    async checkUser(@Body() form:UserDto) {
-        // const cookies = this.ctx.cookies;
-        // const username = cookies.get('username'); // cookie example
+    async crreateUser(@Body() form:UserDto) {
         try {
             // 调用 UserService 来验证用户名和密码
             console.log(form.username);
-            const isValid = await this.userService.checkCredentials(form.username, form.password);
+            const isValid = await this.userService.CreateAUser(form.username, form.password);
             if (isValid) {
                 return {
                     success: true,
-                    message: '登录成功',
+                    message: '注册成功',
                 };
             } else {
                 return {
                     success: false,
-                    message: '用户名或密码错误',
+                    message: '注册失败，用户名已被注册',
                 };
             }
         } catch (error) {
