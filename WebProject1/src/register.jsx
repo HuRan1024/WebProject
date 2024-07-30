@@ -1,53 +1,48 @@
 import React, { useState } from 'react';
 import './App.css'
-import * as axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import * as axios from 'axios';
 
-
-
-function LoginPage() {
+function RegisterPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const client = axios.default;
     const data = {
         username: username,
         password: password
     }; 
-    const handleLoginSuccess = () => {
-        // 登录成功后的处理
-        navigate('/mainpage'); //跳转到 /mainpage
+    const client = axios.default;
+    const handleRegisterSuccess = () => {
+        navigate('/'); //跳转到主界面
     };
 
-    const handleLoginFailure = (errorMessage) => {
-        // 登录失败后的处理
+    const handleRegisterFailure = (errorMessage) => {
         alert(errorMessage);
         // 可以添加显示错误消息的逻辑
     };
-
-    const handleLogin = async (event) => {
+    const handleRegister = async (event) => {
         event.preventDefault(); // 阻止表单默认提交行为
+
         if (username && password) {
             try {
-                const response = await client.post('http://127.0.0.1:7001/login', data); //需要填写后端端口，从该端口发送post请求
+                const response = await client.post('http://127.0.0.1:7001/register', data); //需要填写后端端口，从该端口发送post请求
                 const { success, message } = response.data;
-                if (success === true) {
-                    alert(message)
-                    handleLoginSuccess();
+                if (success === true) {  //成功的status对应为0
+                    alert(message);
+                    handleRegisterSuccess();
                 } else {
-                    handleLoginFailure(message);
+                    handleRegisterFailure(message);
                 }
             } catch (error) {
-                alert(error);
-                console.error('登录请求失败:', error);
-                handleLoginFailure('登录请求失败');
+                console.error('注册请求失败:', error);
+                handleLoginFailure('注册请求失败');
             }
         }
     };
 
     return (
         <div className="card">
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleRegister}>
                 <div>
                     <label htmlFor="username">用户名:</label>
                     <input
@@ -69,7 +64,7 @@ function LoginPage() {
                     />
                 </div>
                 <div>
-                    <button type="submit">登录</button>
+                    <button type="submit">注册</button>
                 </div>
             </form>
             {/* 错误消息的显示逻辑 */}
@@ -77,5 +72,4 @@ function LoginPage() {
         </div>
     );
 }
-
-export default LoginPage
+export default RegisterPage
