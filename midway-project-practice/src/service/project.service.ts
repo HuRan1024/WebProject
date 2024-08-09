@@ -1,5 +1,3 @@
-import { T } from "vitest/dist/reporters-B7ebVMkT";
-import { Task } from "./task.service";
 import * as fs from 'fs';
 
 export class Project {
@@ -7,10 +5,10 @@ export class Project {
     name: string;
     discription: string;
     members: string[];
-    tasks: Set<Task> = null;
+    tasks: string[] = [];
     password: string; //用于成员加入项目的验证
 
-    constructor(id: number, name: string, discription: string, members: string[], tasks:Set<Task>, password: string) {
+    constructor(id: number, name: string, discription: string, members: string[], tasks: string[], password: string) {
         this.name = name;
         this.discription = discription;
         this.members = members;
@@ -20,11 +18,8 @@ export class Project {
     }
 
     buildAProjectString(): string {
-        let result: string = this.id.toString() + ';' + this.name + ';' + this.discription + ';' + this.members.join(',') + ';';  // 缺陷：无法在discription中使用'
-        for (const task of this.tasks) {
-            result += task.id + ',';
-        }
-        result += this.password;
+        let result: string = this.id.toString() + ';' + this.name + ';' + this.discription + ';' + this.members.join(',') + ';' + this.tasks.join(',');  // 缺陷：无法在discription中使用';'
+        result += ';' + this.password + '\n';
         return result;
     }
 
@@ -35,6 +30,12 @@ export class Project {
                 return false;
             } else {
                 const data = fileContent.split('\n');
+                /*删除data中的空行*/
+                data.forEach((item, index) => {
+                    if (item === '') {
+                        data.splice(index, 1);
+                    }
+                })
                 let result: string = this.buildAProjectString();
                 data[this.id] = result;
                 const content = data.join('\n');
@@ -54,6 +55,12 @@ export class Project {
                 return false;
             } else {
                 const data = fileContent.split('\n');
+                /*删除data中的空行*/
+                data.forEach((item, index) => {
+                    if (item === '') {
+                        data.splice(index, 1);
+                    }
+                })
                 this.id = data.length;
                 let result: string = this.buildAProjectString();
                 fs.appendFile('./src/service/data/project.txt', result, 'utf-8', (err) => {
@@ -66,30 +73,43 @@ export class Project {
     }
 
     static async getAProject(name: string): Promise<Project> {
-        fs.readFile('./src/service/data/project.txt', 'utf-8', async (err, fileContent) => {
-            if(err) {
-                console.error('读取文件时出错:', err);
-                return null;
-            }else{
-                const datas = fileContent.split('\n');
-                for(let data in datas) {
-                    let aData = data.split(';');
-                    if (aData[1] == name){
-                        let id = Number(aData[0]);
-                        let name = aData[1];
-                        let discription = aData[2];
-                        let members = aData[3].split(',');
-                        let tasks: Set<Task>;
-                        for(let task_id in aData[4].split(',')) {
-                            tasks.add(await Task.getATask(task_id));
+        return new Promise((resolve, reject) => {
+            fs.readFile('./src/service/data/project.txt', 'utf-8', async (err, fileContent) => {
+                if (err) {
+                    console.error('读取文件时出错:', err);
+                    reject(null);
+                } else {
+                    const datas = fileContent.split('\n');
+                    /*删除data中的空行*/
+                    datas.forEach((item, index) => {
+                        if (item === '') {
+                            datas.splice(index, 1);
                         }
-                        let password = aData[5];
-                        return new Project(id, name, discription, members, tasks, password);
+                    })
+                    for (let data of datas) {
+                        let aData = data.split(';');
+                        if (aData[1] == name) {
+                            let id = Number(aData[0]);
+                            let name = aData[1];
+                            let discription = aData[2];
+                            let members = aData[3].split(',');
+                            let tasks: string[] = [];
+                            if (aData[4] != '') {
+                                let task = aData[4].split(',')
+                                task.forEach((item, index) => {
+                                    if (item === '') {
+                                        task.splice(index, 1);
+                                    }
+                                })
+                                tasks = task;
+                            }
+                            let password = aData[5];
+                            resolve(new Project(id, name, discription, members, tasks, password));
+                        }
                     }
+                    resolve(null);
                 }
-            }
-        })
-        return null;
+            });
+        });
     }
-
 }

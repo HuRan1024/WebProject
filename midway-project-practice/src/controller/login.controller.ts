@@ -1,6 +1,5 @@
 import { Body, Controller, Inject, Post } from '@midwayjs/core';
 import { UserService } from '../service/user.service';
-import { Context } from '@midwayjs/koa';
 
 
 export class UserDto {
