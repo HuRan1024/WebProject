@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { Task } from './task.service';
 
 export class Project {
     id: number;  // 存储在文本中的第几行, 从零开始计算
@@ -112,4 +113,14 @@ export class Project {
             });
         });
     }
+
+    async getTasks(): Promise<Task[]> {
+        let tasks: Task[] = [];
+        for (let task of this.tasks) {
+            tasks.push(await Task.getATask(task));
+        }
+        return tasks;
+    }
+    
 }
+

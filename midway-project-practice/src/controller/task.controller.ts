@@ -34,4 +34,23 @@ export class TaskController {
             };
         }
     }
+
+    @Post('/addComment')
+    async addComment(@Body() form: { taskId: string, comment: string }) {
+        let task: Task = await Task.getATask(form.taskId);
+        task.comments.push(form.comment);
+        /*删除comments中的所有''*/
+        task.comments = task.comments.filter((item) => item !== '');
+        if (await task.changeATask()) {
+            return {
+                status: 'success',
+                message: '添加评论成功',
+                comments: task.comments
+            };
+        } else {
+            return {
+                status: 'failed',
+            }
+        }
+    }
 }
