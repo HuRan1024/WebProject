@@ -46,7 +46,8 @@
 }
 
 .top-right-button {
-    padding: 5px 10px;
+    padding: 10px;
+    margin-left: 5px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
@@ -140,5 +141,73 @@
 }
 
 .comment-container button:hover {
+    background-color: #0056b3;
+}
+
+.task-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-container {
+    background-color: rgb(30, 27, 27);
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.task-container h3 {
+    margin-top: 0;
+}
+
+.task-container input[type="text"],
+.task-container textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.task-container input[type="date"] {
+    width: 50%;
+    margin-bottom: 10px;
+    padding: 5px;
+    /* 其他样式 */
+}
+
+.task-container input[type="date"] + p {
+    display: inline;
+    margin-left: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.task-container button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin-left: 45%;
+}
+
+.task-container button:hover {
     background-color: #0056b3;
 }

@@ -1,9 +1,9 @@
-import { Body, Controller, Inject, Post } from '@midwayjs/core';
+import { Body, Controller, Post } from '@midwayjs/core';
 import { Task } from '../service/task.service';
 import { Project } from '../service/project.service';
-import { Context } from '@midwayjs/koa';
 
 export class TaskDto {
+    projectName: string;
     name: string;
     discription: string;
     members: string;   // 不同成员之间需要以','为分割
@@ -12,20 +12,18 @@ export class TaskDto {
 
 @Controller('/task')
 export class TaskController {
-    @Inject()
-    ctx: Context;
 
     @Post('/create')
     async createTask(@Body() form: TaskDto) {
-        let projectName = this.ctx.cookies.get('project');
-        let project: Project = await Project.getAProject(projectName);
-        let task: Task = new Task(0, form.name, form.discription, form.members.split(','), form.ddl, 'undone', projectName, []);
+        let project: Project = await Project.getAProject(form.projectName);
+        let task: Task = new Task(0, form.name, form.discription, form.members.split(','), form.ddl, 'todo', form.projectName, []);
         await task.createATask();
         project.tasks.push(task.id.toString());
         if (await project.changeAProject()) {
             return {
                 status: 'success',
-                message: '创建任务成功'
+                message: '创建任务成功',
+                task: task
             };
         } else {
             return {

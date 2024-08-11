@@ -116,11 +116,13 @@ export class Project {
 
     async getTasks(): Promise<Task[]> {
         let tasks: Task[] = [];
-        for (let task of this.tasks) {
-            tasks.push(await Task.getATask(task));
+        if (this.tasks.length != 0) {
+            for (let task of this.tasks) {
+                tasks.push(await Task.getATask(task));
+            }
         }
         return tasks;
     }
-    
+
 }
 

@@ -17,7 +17,13 @@ export class projectController {
         if (newProject.storeAProject()) {
             return {
                 status: 'success',
-                message: '创建成功'
+                message: '创建成功',
+                projectName: form.name,
+                tasks: {
+                    todo: [],
+                    inProgress: [],
+                    done: []
+                }
             };
         } else {
             return {
@@ -50,6 +56,4 @@ export class projectController {
 
         return result;
     }
-
-
 }
