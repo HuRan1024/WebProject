@@ -48,7 +48,7 @@ export class Task {
         let result: string = this.id.toString() + '$' + this.name + '$' + this.discription + '$'
             + this.members.join(',') + '$' + this.ddl + '$' + this.status + '$' + this.projectBelonged + '$' + this.comments.join('|') + '$';
         for (let i = 0; i < this.files.length; i++) {
-            result += this.files[i].fileName + ' ' + this.files[i].data + '|';
+            result += this.files[i].fileName + '&' + this.files[i].data + '|';
         }
         result += '\n';
         return result;
@@ -159,7 +159,7 @@ export class Task {
                     let files: MyFile[] = [];
                     for (let file of aData[8].split('|')) {
                         if (file != '') {
-                            let fileData = file.split(' ');
+                            let fileData = file.split('&');
                             files.push(new MyFile(fileData[0], fileData[1]));
                         }
                     }

@@ -208,10 +208,6 @@ const AgileBoard = () => {
         setShowJoinProjectForm(false);
     };
 
-    const handleOpenProject = async () => {
-
-    };
-
     const handleChangeStatus = () => {
         setStatusChange(true);
     };
@@ -316,7 +312,6 @@ const AgileBoard = () => {
                 <button className="top-right-button" onClick={handleTaskAddClick}>添加任务</button>
                 <button className="top-right-button" onClick={handleCreateProject}>创建项目</button>
                 <button className="top-right-button" onClick={handleJoinProject}>加入/切换项目</button>
-                <button className="top-right-button" onClick={handleOpenProject}>打开项目</button>
             </div>
             <div className="swimlanes">
                 <div className="swimlane">
@@ -377,7 +372,7 @@ const AgileBoard = () => {
                                 <ul>
                                     {selectedTask.files.map((file, index) => (
                                         <li key={index}>
-                                            <button onClick={() => handleDownload(file)}>{file.fileName}</button>
+                                            <a href={`http://127.0.0.1:7001/file/download?taskId=${selectedTask.id}&filename=${file.fileName}`} download>{file.fileName}</a>
                                         </li>
                                     ))}
                                 </ul>
