@@ -1,0 +1,263 @@
+.agile-board {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin-top: -20px; /* 上移整体 */
+}
+
+.swimlanes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.swimlane {
+    width: 30%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 70px;
+    margin: 10px;
+}
+
+.swimlane-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    margin-left: -30%;
+}
+
+.card {
+    width: 80%; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 50px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.top-right-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.top-right-button {
+    padding: 10px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.top-right-button:hover {
+    background-color: #0056b3;
+}
+
+.task-detail-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-detail-container {
+    background-color: rgb(30, 27, 27);
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.task-detail-container h2 {
+    margin-top: 0;
+}
+
+.task-detail-container button {
+    margin-top: 20px;
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.task-detail-container button:hover {
+    background-color: #0056b3;
+}
+
+.comment-overlay, .join-project-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-container, .join-project-container {
+    background-color: rgb(30, 27, 27);
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-container h3, .join-project-container h3 {
+    margin-bottom: 10px;
+}
+
+.comment-container textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.comment-container button, .join-project-container button {
+    margin-top: 10px;
+    /* margin-left: 10px; */
+    padding: 10px;
+    /* border: none; */
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    cursor: pointer;
+}
+
+.comment-container button:hover {
+    background-color: rgba(3, 3, 3, 0.5);
+}
+
+.task-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-container {
+    background-color: rgb(30, 27, 27);
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.task-container h3 {
+    margin-top: 0;
+}
+
+.task-container input[type="text"],
+.task-container textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.task-container input[type="date"] {
+    width: 50%;
+    margin-bottom: 10px;
+    padding: 5px;
+    /* 其他样式 */
+}
+
+.task-container input[type="date"] + p {
+    display: block;
+    margin-left: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.task-container button {
+    margin-top: 10px;
+    /* margin-left: 10px; */
+    padding: 10px;
+    width: 100%;
+    /* border: none; */
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.task-container button:hover {
+    background-color: #0056b3;
+}
+
+.join-project-container p {
+    margin-bottom: 10px;
+}
+
+.join-project-container input {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: calc(100% - 22px);
+    box-sizing: border-box;
+}
+
+.status-change-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.status-change-container {
+    background-color: rgb(30, 27, 27);
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 600px;
+}
+
+.status-change-container h3 {
+    margin-bottom: 10px;
+}
+
+.status-change-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-change-container select {
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+.status-change-container button {
+    margin-top: 10px;
+}
