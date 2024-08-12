@@ -16,7 +16,7 @@ export class TaskController {
     @Post('/create')
     async createTask(@Body() form: TaskDto) {
         let project: Project = await Project.getAProject(form.projectId);
-        let task: Task = new Task(0, form.name, form.discription, form.members.split(','), form.ddl, 'todo', form.projectId, []);
+        let task: Task = new Task(0, form.name, form.discription, form.members.split(','), form.ddl, 'todo', form.projectId, [], []);
         await task.createATask();
         project.tasks.push(task.id.toString());
         if (await project.changeAProject()) {

@@ -99,7 +99,7 @@
     background-color: #0056b3;
 }
 
-.comment-overlay, .join-project-overlay {
+.comment-overlay, .join-project-overlay, .upload-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -111,7 +111,7 @@
     align-items: center;
 }
 
-.comment-container, .join-project-container {
+.comment-container, .join-project-container, .upload-container {
     background-color: rgb(30, 27, 27);
     padding: 20px;
     border-radius: 5px;
@@ -122,7 +122,7 @@
     flex-direction: column;
 }
 
-.comment-container h3, .join-project-container h3 {
+.comment-container h3, .join-project-container h3, .upload-container h3 {
     margin-bottom: 10px;
 }
 
@@ -132,7 +132,7 @@
     margin-bottom: 10px;
 }
 
-.comment-container button, .join-project-container button {
+.comment-container button, .join-project-container button, .upload-container button {
     margin-top: 10px;
     /* margin-left: 10px; */
     padding: 10px;
@@ -260,4 +260,35 @@
 
 .status-change-container button {
     margin-top: 10px;
+}
+
+.upload-container input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.attachments {
+    margin-top: 20px;
+}
+
+.attachments h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.attachments ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.attachments li {
+    margin-bottom: 5px;
+}
+
+.attachments a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.attachments a:hover {
+    text-decoration: underline;
 }
