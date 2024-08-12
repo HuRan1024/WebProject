@@ -19,8 +19,8 @@ export class Project {
     }
 
     buildAProjectString(): string {
-        let result: string = this.id.toString() + ';' + this.name + ';' + this.discription + ';' + this.members.join(',') + ';' + this.tasks.join(',');  // 缺陷：无法在discription中使用';'
-        result += ';' + this.password + '\n';
+        let result: string = this.id.toString() + '$' + this.name + '$' + this.discription + '$' + this.members.join(',') + '$' + this.tasks.join(',');  // 缺陷：无法在discription中使用'$'
+        result += '$' + this.password + '\n';
         return result;
     }
 
@@ -73,7 +73,7 @@ export class Project {
         return true;
     }
 
-    static async getAProject(name: string): Promise<Project> {
+    static async getAProject(ID: string): Promise<Project> {
         return new Promise((resolve, reject) => {
             fs.readFile('./src/service/data/project.txt', 'utf-8', async (err, fileContent) => {
                 if (err) {
@@ -88,8 +88,8 @@ export class Project {
                         }
                     })
                     for (let data of datas) {
-                        let aData = data.split(';');
-                        if (aData[1] == name) {
+                        let aData = data.split('$');
+                        if (aData[0] == ID) {
                             let id = Number(aData[0]);
                             let name = aData[1];
                             let discription = aData[2];

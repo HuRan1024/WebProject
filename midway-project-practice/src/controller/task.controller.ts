@@ -3,7 +3,7 @@ import { Task } from '../service/task.service';
 import { Project } from '../service/project.service';
 
 export class TaskDto {
-    projectName: string;
+    projectId: string;
     name: string;
     discription: string;
     members: string;   // 不同成员之间需要以','为分割
@@ -15,8 +15,8 @@ export class TaskController {
 
     @Post('/create')
     async createTask(@Body() form: TaskDto) {
-        let project: Project = await Project.getAProject(form.projectName);
-        let task: Task = new Task(0, form.name, form.discription, form.members.split(','), form.ddl, 'todo', form.projectName, []);
+        let project: Project = await Project.getAProject(form.projectId);
+        let task: Task = new Task(0, form.name, form.discription, form.members.split(','), form.ddl, 'todo', form.projectId, []);
         await task.createATask();
         project.tasks.push(task.id.toString());
         if (await project.changeAProject()) {

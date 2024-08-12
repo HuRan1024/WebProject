@@ -10,6 +10,8 @@ const AgileBoard = () => {
         done: []
     });
 
+    const [project, setProject] = useState({id:'', name: '', discription: '', members: '', ddl: '' });
+
     const [selectedTask, setSelectedTask] = useState(null); // 用于存储选中的任务
     const [newComment, setNewComment] = useState(''); // 用于存储新评论
     const [commentAdd, setCommentAdd] = useState(false); // 用于检测是否需要增加评论
@@ -23,11 +25,11 @@ const AgileBoard = () => {
     }, []);
 
     const fetchTasks = async () => {
-        // document.cookie = "projectName=test; path=/";  // 设置cookie临时调试，之后删除
+        document.cookie = "projectId=0; path=/";  // 设置cookie临时调试，之后删除
         //获取cookie
-        const projectName = getCookie('projectName');
+        const projectId = getCookie('projectId');
         const response = await axios.post('http://127.0.0.1:7001/project/getTasks', {
-            projectName: projectName
+            projectId: projectId
         });
         const data = await response.data;
         console.log('Received data:', data); // 添加日志
@@ -98,9 +100,9 @@ const AgileBoard = () => {
 
     const handleTaskSubmit = async () => {
         try {
-            const projectName = getCookie('projectName');
+            const projectId = getCookie('projectId');
             const response = await axios.post('http://127.0.0.1:7001/task/create', {
-                projectName: projectName,
+                projectId: projectId,
                 name: newTask.name,
                 discription: newTask.discription,
                 members: newTask.members,

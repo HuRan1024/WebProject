@@ -14,11 +14,11 @@ export class projectController {
     @Post('/create')
     async createANewProject(@Body() form: ProjectDto) {
         let newProject = new Project(0, form.name, form.discription, form.members.split(','), [], form.password)
-        if (newProject.storeAProject()) {
+        if (await newProject.storeAProject()) {
             return {
                 status: 'success',
                 message: '创建成功',
-                projectName: form.name,
+                projectId: newProject.id,
                 tasks: {
                     todo: [],
                     inProgress: [],
@@ -34,9 +34,9 @@ export class projectController {
     }
 
     @Post('/getTasks')
-    async getTasks(@Body() form: { projectName: string }) {
-        let projectName = form.projectName;
-        let project: Project = await Project.getAProject(projectName);
+    async getTasks(@Body() form: { projectId: string }) {
+        let id = form.projectId;
+        let project: Project = await Project.getAProject(id);
         let tasks = await project.getTasks();
 
         let result = tasks.reduce((acc, task) => {
