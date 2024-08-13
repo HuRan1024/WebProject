@@ -163,7 +163,8 @@ const MainPage = () => {
             console.log('项目已创建:', data);
             document.cookie = `projectId=${data.projectId}; path=/;`;
             // 更新任务状态以反映新项目
-            setTasks(data.tasks);
+            fetchProject();
+            fetchTasks();
         } catch (error) {
             console.error('创建项目时出错:', error);
         }
@@ -238,6 +239,7 @@ const MainPage = () => {
 
     const handleStatusChangeSubmit = (e) => {
         e.preventDefault();
+        console.log(selectedTask, newStatus);
         if (!newStatus || newStatus === selectedTask.status) {
             alert('请选择新的状态');
             return;
