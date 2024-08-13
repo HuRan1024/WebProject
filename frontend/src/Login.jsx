@@ -92,8 +92,6 @@ function LoginPage() {
                     <button type="submit">登录</button>
                 </div>
             </form>
-            {/* 错误消息的显示逻辑 */}
-            { /* <p className="error-message">错误消息</p> */}
         </div>
     );
 }

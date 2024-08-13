@@ -12,7 +12,7 @@ const Project = {
     password: ''
 }
 
-const AgileBoard = () => {
+const MainPage = () => {
 
     const [tasks, setTasks] = useState({
         todo: [],
@@ -238,8 +238,13 @@ const AgileBoard = () => {
 
     const handleStatusChangeSubmit = (e) => {
         e.preventDefault();
+        if (!newStatus || newStatus === selectedTask.status) {
+            alert('请选择新的状态');
+            return;
+        }
         handleStatusChange();
     };
+
 
     const handleStatusChangeCancel = () => {
         setStatusChange(false);
@@ -272,31 +277,6 @@ const AgileBoard = () => {
             setShowUploadForm(false); // 关闭上传窗口
         } catch (error) {
             console.error('上传文件时出错:', error); // 添加日志
-        }
-    };
-
-    const handleDownload = async (file) => {
-        console.log(file);
-        try {
-            const response = await axios.post('http://127.0.0.1:7001/file/download', {
-                data: file.data,
-            });
-            console.log(response);
-            if (response.status === 'success') {
-                const blob = new Blob([response.data]);
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = file.fileName;
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            } else {
-                console.error('File download failed');
-            }
-        } catch (error) {
-            console.error('File download failed', error);
         }
     };
 
@@ -448,6 +428,7 @@ const AgileBoard = () => {
                 <div className="upload-overlay">
                     <div className="upload-container">
                         <h3>上传附件</h3>
+                        <p>请选择要上传的文件:(不超过10Mb)</p>
                         <input type="file" onChange={handleFileChange} required />
                         <button onClick={handleFileSubmit}>提交</button>
                         <button onClick={() => setShowUploadForm(false)}>取消</button>
@@ -458,4 +439,4 @@ const AgileBoard = () => {
     );
 };
 
-export default AgileBoard;
+export default MainPage;

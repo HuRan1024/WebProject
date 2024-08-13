@@ -1,7 +1,8 @@
 .agile-board {
     font-family: Arial, sans-serif;
     padding: 20px;
-    margin-top: -20px; /* 上移整体 */
+    margin-top: -20px;
+    /* 上移整体 */
 }
 
 .swimlanes {
@@ -15,28 +16,46 @@
     border-radius: 5px;
     padding: 70px;
     margin: 10px;
+    justify-content: center;
+    text-align: center;
 }
 
 .swimlane-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 10px;
 }
 
 .cards {
-    display: flex;
+    /* display: flex; */
+    width: 130%;
+    /* border: 1px solid #ddd; */
     flex-direction: column;
-    margin-left: -30%;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .card {
-    width: 80%; 
-    border: 1px solid #ddd;
+    display: block;
+    width: 80%;
+    height: 100%;
+    border: 2px solid #ddd;
     border-radius: 5px;
     padding: 50px;
     margin-bottom: 10px;
     cursor: pointer;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    /* 添加过渡效果 */
+}
+
+.card:hover {
+    background-color: #f0f0f0;
+    /* 鼠标悬停时的背景颜色 */
 }
 
 .top-right-button-container {
@@ -77,11 +96,18 @@
     border-radius: 5px;
     width: 50%;
     max-width: 600px;
+
     text-align: center;
 }
 
 .task-detail-container h2 {
+    color: white;
     margin-top: 0;
+}
+
+.task-detail-container p {
+    color: white;
+    margin-bottom: 10px;
 }
 
 .task-detail-container button {
@@ -99,7 +125,9 @@
     background-color: #0056b3;
 }
 
-.comment-overlay, .join-project-overlay, .upload-overlay {
+.comment-overlay,
+.join-project-overlay,
+.upload-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -111,7 +139,9 @@
     align-items: center;
 }
 
-.comment-container, .join-project-container, .upload-container {
+.comment-container,
+.join-project-container,
+.upload-container {
     background-color: rgb(30, 27, 27);
     padding: 20px;
     border-radius: 5px;
@@ -122,7 +152,10 @@
     flex-direction: column;
 }
 
-.comment-container h3, .join-project-container h3, .upload-container h3 {
+.comment-container h3,
+.join-project-container h3,
+.upload-container h3 {
+    color: white;
     margin-bottom: 10px;
 }
 
@@ -132,19 +165,26 @@
     margin-bottom: 10px;
 }
 
-.comment-container button, .join-project-container button, .upload-container button {
+.comment-container button,
+.join-project-container button,
+.upload-container button,
+.status-change-container button {
     margin-top: 10px;
     /* margin-left: 10px; */
     padding: 10px;
     /* border: none; */
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #007bff;
     color: white;
     cursor: pointer;
 }
 
-.comment-container button:hover {
-    background-color: rgba(3, 3, 3, 0.5);
+.comment-container button:hover,
+.join-project-container button:hover,
+.upload-container button:hover,
+.status-change-container button:hover {
+    background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 .task-overlay {
@@ -169,6 +209,7 @@
 }
 
 .task-container h3 {
+    color: white;
     margin-top: 0;
 }
 
@@ -188,7 +229,7 @@
     /* 其他样式 */
 }
 
-.task-container input[type="date"] + p {
+.task-container input[type="date"]+p {
     display: block;
     margin-left: 5px;
     margin-right: 10px;
@@ -245,6 +286,7 @@
 }
 
 .status-change-container h3 {
+    color: white;
     margin-bottom: 10px;
 }
 
@@ -256,10 +298,6 @@
 .status-change-container select {
     margin-bottom: 10px;
     padding: 20px;
-}
-
-.status-change-container button {
-    margin-top: 10px;
 }
 
 .upload-container input[type="file"] {
@@ -291,4 +329,12 @@
 
 .attachments a:hover {
     text-decoration: underline;
+}
+
+.attachments h4 {
+    color: white;
+}
+
+.upload-container p {
+    color: white;
 }

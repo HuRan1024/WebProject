@@ -5,8 +5,8 @@ import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './Login.jsx';
 import RegisterPage from './register.jsx';
-import MainPage from './mainPage.jsx';
 import StartPage from './startPage.jsx';
+import MainPage from './mainPage.jsx';
 
 const handleLoginSuccess = () => {
   // 登录成功后的处理

@@ -50,27 +50,35 @@ export class Project {
     }
 
     async storeAProject(): Promise<boolean> {  // 用于创建项目时使用
-        fs.readFile('./src/service/data/project.txt', 'utf-8', (err, fileContent) => {
-            if (err) {
-                console.error('读取文件时出错:', err);
-                return false;
-            } else {
-                const data = fileContent.split('\n');
-                /*删除data中的空行*/
-                data.forEach((item, index) => {
-                    if (item === '') {
-                        data.splice(index, 1);
+        try {
+            const fileContent:string = await new Promise((resolve, reject) => {
+                fs.readFile('./src/service/data/project.txt', 'utf-8', (err, content) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(content);
                     }
-                })
-                this.id = data.length;
-                let result: string = this.buildAProjectString();
+                });
+            });
+    
+            const data = fileContent.split('\n').filter(item => item !== '');
+            this.id = data.length;
+            const result: string = this.buildAProjectString();
+    
+            await new Promise<void>((resolve, reject) => {
                 fs.appendFile('./src/service/data/project.txt', result, 'utf-8', (err) => {
-                    console.error('写入文件时发生错误:', err);
-                    return false;
-                })
-            }
-        })
-        return true;
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+            return true;
+        } catch (err) {
+            console.error('读取或写入文件时出错:', err);
+            return false;
+        }
     }
 
     static async getAProject(ID: string): Promise<Project> {
