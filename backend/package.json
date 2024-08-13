@@ -5,20 +5,23 @@
   "private": true,
   "dependencies": {
     "@midwayjs/bootstrap": "^3.12.0",
-    "@midwayjs/core": "^3.12.0",
+    "@midwayjs/core": "^3.16.2",
     "@midwayjs/cross-domain": "^3.16.5",
     "@midwayjs/decorator": "^3.16.2",
     "@midwayjs/hooks-upload": "^3.1.6",
     "@midwayjs/info": "^3.12.0",
     "@midwayjs/koa": "^3.12.0",
     "@midwayjs/logger": "^3.1.0",
+    "@midwayjs/static-file": "^3.16.5",
     "@midwayjs/upload": "^3.16.2",
     "@midwayjs/validate": "^3.12.0",
     "@midwayjs/web": "^3.16.5",
     "axios": "^1.7.2",
+    "koa-static-cache": "^5.1.4",
     "midway": "^2.14.7",
     "mongoose": "^8.5.2",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "pkg": "^5.8.1"
   },
   "devDependencies": {
     "@midwayjs/mock": "^3.12.0",
@@ -42,7 +45,16 @@
     "lint": "mwts check",
     "lint:fix": "mwts fix",
     "ci": "npm run cov",
-    "build": "mwtsc --cleanOutDir"
+    "build": "mwtsc --cleanOutDir",
+    "bundle": "bundle && npm run build",
+    "pkg": "pkg . -t node18-win-x64 --out-path ./output"
+  },
+  "bin": "./bootstrap.js",
+  "pkg": {
+    "scripts": "dist/**/*.js",
+    "targets": [
+      "node18-win-x64"
+    ]
   },
   "repository": {
     "type": "git",

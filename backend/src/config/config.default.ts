@@ -28,4 +28,14 @@ export default {
     // 仅在匹配路径到 /api/upload 的时候去解析 body 中的文件信息
     match: /.*/,
   },
+  staticFile: {
+    dirs: {
+      default: {
+        prefix: '/',
+        alias: {
+          '/': '/index.html',
+        },
+      },
+    }
+  },
 } as MidwayConfig;

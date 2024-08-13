@@ -106,7 +106,8 @@ export class Task {
             let result: string = this.buildATaskString();
             data[this.id] = result;
 
-            const content = data.join('\n');
+            let content = data.join('\n');
+            content += '\n';
             await new Promise((resolve, reject) => {
                 fs.writeFile('./src/service/data/task.txt', content, 'utf-8', (err) => {
                     if (err) {

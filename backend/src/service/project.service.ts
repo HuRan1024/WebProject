@@ -39,7 +39,8 @@ export class Project {
                 })
                 let result: string = this.buildAProjectString();
                 data[this.id] = result;
-                const content = data.join('\n');
+                let content = data.join('\n');
+                content += '\n';
                 fs.writeFile('./src/service/data/project.txt', content, 'utf-8', (err) => {
                     console.error('写入文件时发生错误:', err);
                     return false;

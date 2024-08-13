@@ -1,18 +1,21 @@
-import { Controller, Get, Inject } from '@midwayjs/core';
-import { UserService } from '../service/user.service';
+import {
+  Inject,
+  Provide,
+  ServerlessTrigger,
+  ServerlessTriggerType,
+} from '@midwayjs/core';
+import { Context } from '@midwayjs/koa';
 
-@Controller('/')
-export class HomeController {
-  @Get('/')
-  async home1(): Promise<string> {
-    return 'I love niuniu!';
-  }
-  @Get('/test')
-  async home(): Promise<string> {
-    return 'Hello Midwayjs!';
-  }
-
+@Provide()
+export class HelloHTTPService {
   @Inject()
-  userService: UserService;
+  ctx: Context;
 
+  @ServerlessTrigger(ServerlessTriggerType.HTTP, {
+    path: '/public/*',
+    method: 'get',
+  })
+  async handleStaticFile() {
+    // 这个函数可以没有方法体，只是为了让网关注册一个额外的路由
+  }
 }
