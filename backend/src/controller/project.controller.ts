@@ -76,7 +76,7 @@ export class projectController {
                 message: '项目不存在'
             }
         } else {
-            if (project.password === password) {
+            if (project.password === password || project.members.includes(form.user)) {
                 if (!project.members.includes(form.user)) {
                     project.members.push(form.user);
                 }

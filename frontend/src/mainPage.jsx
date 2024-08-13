@@ -399,8 +399,9 @@ const MainPage = () => {
                 <div className="join-project-overlay">
                     <div className="join-project-container">
                         <h3>加入项目</h3>
+                        <p>若已经加入过目标项目，不必输入密码即可打开项目</p>
                         <input type="text" name="projectId" value={joinProject.projectId} onChange={handleJoinProjectChange} placeholder="项目ID" required />
-                        <input type="text" name="password" value={joinProject.password} onChange={handleJoinProjectChange} placeholder="项目密码" required />
+                        <input type="text" name="password" value={joinProject.password} onChange={handleJoinProjectChange} placeholder="项目密码" />
                         <button onClick={handleJoinProjectSubmit}>提交</button>
                         <button onClick={handleJoinProjectFormClose}>取消</button>
                     </div>
